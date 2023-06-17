@@ -1,0 +1,109 @@
+<button type="button" class="button" (click)="openAddModal(null,'add')">Add New Course</button>
+<div class="container" id="main-container">
+  <div class="row">
+    <div *ngFor="let course of courses" class="col-sm-6 col-xl-4">
+      <div class="card m-b-30">
+        <div class="card-body row">
+          <div class="col-6">
+            <img src="{{course?.imageUrl}}" alt="">
+            <h5>{{course?.coursename}}</h5>
+            <p>{{course?.coursedescription}}<p>
+            <a href="#" class="btn" > View Course </a>
+            <a class="btn" (click)="openEditModal(course,'edit')"> Edit Course </a>
+            <a class="btn" (click)="openDeleteModal(course,'delete')"> Delete Course</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="onAddCourses">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Add New Course </h5>
+        <button type="button" class="close" (click)="closeAddModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm"(ngSubmit)="onAddCourses(addForm)">
+          <div class="form-group">
+            <label for="coursename">Course Name</label>
+            <input type="text" ngModel name="coursename"class="form-control" id="coursename" placeholder="Enter course name" required>
+          </div>
+          <div class="form-group">
+            <label for="coursedescription">Course Description</label>
+            <input type="text" ngModel name="coursedescription" class="form-control" id="coursedescription" placeholder="Enter course description" required>
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter image Url" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeAddModal()" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" (click)="closeAddModal()">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="onEditCourses">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Edit Course {{editCourses?.coursename}}</h5>
+        <button type="button" class="close" (click)="closeEditModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="coursename">Course Name </label>
+            <input type="text" ngModel="{{editCourses?.coursename}}" name="coursename"class="form-control" id="coursename" placeholder="Enter course name" required>
+          </div>
+          <input type="hidden" ngModel="{{editCourses?.courseid}}" name="courseid" class="form-control" id="courseid" placeholder="Enter course id">
+          <input type="hidden" ngModel="{{editCourses?.courseCode}}"name="courseCode" class="form-control" id="courseCode" placeholder="Enter course code">
+          <div class="form-group">
+            <label for="coursedescription">Course Description</label>
+            <input type="text" ngModel="{{editCourses?.coursedescription}}"ngModel name="coursedescription" class="form-control" id="coursedescription" placeholder="Enter course description" required>
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" ngModel="{{editCourses?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter image Url" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()" data-dismiss="modal">Close</button>
+            <button type="submit"(click)="onUpdateCourses(editForm.value)" class="btn btn-primary"(click)="closeEditModal()">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="onDeleteCourses">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Delete Course </h5>
+        <button type="button" class="close" (click)="closeDeleteModal()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to delete Course {{deleteCourses?.coursename}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary"(click)="closeDeleteModal()" (click)="onDeleteCourses(deleteCourses.courseid)" >Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
