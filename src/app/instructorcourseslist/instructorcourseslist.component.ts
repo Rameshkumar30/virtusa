@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Courses } from './courses';
+import { Courses } from '../courses';
 import { CoursesService } from '../courses.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -28,7 +28,6 @@ export class InstructorcourseslistComponent implements OnInit{
       }
     );
   }
-
 
   public onAddCourses(addForm: NgForm):void{
     this.coursesService.addCourses(addForm.value).subscribe(
@@ -68,12 +67,14 @@ export class InstructorcourseslistComponent implements OnInit{
     );
   }
 
+
   openAddModal(courses:null,mode:string):void{
     const button=document.getElementById('onAddCourses');
     if(button!=null){
       button.style.display='block';
     }
   }
+
   openEditModal(courses:Courses,mode:string):void{
     this.editCourses=courses;
     const button=document.getElementById('onEditCourses');
@@ -81,6 +82,7 @@ export class InstructorcourseslistComponent implements OnInit{
       button.style.display='block';
     }
   }
+
   openDeleteModal(courses:Courses,mode:string):void{
     this.deleteCourses=courses;
     const button=document.getElementById('onDeleteCourses');
@@ -88,22 +90,26 @@ export class InstructorcourseslistComponent implements OnInit{
       button.style.display='block';
     }
   }
+
   closeAddModal(){
     const button=document.getElementById('onAddCourses');
     if(button!=null){
       button.style.display='none';
     }
   }
+
   closeEditModal(){
     const button=document.getElementById('onEditCourses');
     if(button!=null){
       button.style.display='none';
     }
   }
+
   closeDeleteModal(){
     const button=document.getElementById('onDeleteCourses');
     if(button!=null){
       button.style.display='none';
     }
   }
+
 }

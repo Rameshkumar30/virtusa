@@ -1,7 +1,8 @@
 export interface Courses {
   courseid: number;
   coursename: string;
-  coursedescription: string;
+  courselevel:string;
+  courseduration:number;
+  enrolledcount:number;
   imageUrl:string;
-  courseCode:string;
 }

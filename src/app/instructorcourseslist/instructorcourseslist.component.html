@@ -1,18 +1,26 @@
-<button type="button" class="button" (click)="openAddModal(null,'add')">Add New Course</button>
+<button type="button" class="button" (click)="openAddModal(null,'add')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+</svg>Add New Course</button>
 <div class="container" id="main-container">
   <div class="row">
     <div *ngFor="let course of courses" class="col-sm-6 col-xl-4">
       <div class="card m-b-30">
         <div class="card-body row">
           <div class="col-6">
-            <img src="{{course?.imageUrl}}" alt="">
-            <h5>{{course?.coursename}}</h5>
-            <p>{{course?.coursedescription}}<p>
-            <a href="#" class="btn" > View Course </a>
-            <a class="btn" (click)="openEditModal(course,'edit')"> Edit Course </a>
-            <a class="btn" (click)="openDeleteModal(course,'delete')"> Delete Course</a>
+            <img src="{{course?.imageUrl}}" alt="{{course?.coursename}}">
+            <br><br>
+            <p style ="font-size: large; font-style: italic; font-weight: 500;"><span style="color:rgb(61, 60, 60);">Course Name : </span><span style="font-size: larger;">{{course?.coursename}}</span><p>
+            <p style ="font-size: large; font-style: italic; font-weight: 500;"><span style="color:rgb(61, 60, 60);">Course Level : </span><span style="font-weight: 400;">{{course?.courselevel}}</span><p>
+            <p style ="font-size: large; font-style: italic; font-weight: 500;"><span style="color:rgb(61, 60, 60);">Course Duration : </span><span style="font-weight: 400;">{{course?.courseduration}} Weeks</span><p>
+            <p style ="font-size: large; font-style: italic; font-weight: 500;"><span style="color:rgb(61, 60, 60);">Enrolled Count : </span><span style="font-weight: 400;">{{course?.enrolledcount}}</span><p>
+            <a class ="btn" id="#lessons" > View Course </a>
+            <a class ="btn" (click)="openEditModal(course,'edit')"> Edit Course </a>
+            <a class ="btn" (click)="openDeleteModal(course,'delete')"> Delete Course</a>
           </div>
         </div>
+      </div>
+      <div class="lesson" id="lessons">
+
       </div>
     </div>
   </div>
@@ -34,14 +42,17 @@
             <input type="text" ngModel name="coursename"class="form-control" id="coursename" placeholder="Enter course name" required>
           </div>
           <div class="form-group">
-            <label for="coursedescription">Course Description</label>
-            <input type="text" ngModel name="coursedescription" class="form-control" id="coursedescription" placeholder="Enter course description" required>
+            <label for="courselevel">Course Level</label>
+            <input type="text" ngModel name="courselevel"class="form-control" id="courselevel" placeholder="Enter course level" required>
+          </div>
+          <div class="form-group">
+            <label for="courseduration">Course Duration</label>
+            <input type="text" ngModel name="courseduration"class="form-control" id="courseduration" placeholder="Enter course duration" required>
           </div>
           <div class="form-group">
             <label for="imageUrl">Image URL</label>
-            <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter image Url" required>
+            <input type="url" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter image Url" required>
           </div>
-
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="closeAddModal()" data-dismiss="modal">Close</button>
             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" (click)="closeAddModal()">Save changes</button>
@@ -68,16 +79,18 @@
             <input type="text" ngModel="{{editCourses?.coursename}}" name="coursename"class="form-control" id="coursename" placeholder="Enter course name" required>
           </div>
           <input type="hidden" ngModel="{{editCourses?.courseid}}" name="courseid" class="form-control" id="courseid" placeholder="Enter course id">
-          <input type="hidden" ngModel="{{editCourses?.courseCode}}"name="courseCode" class="form-control" id="courseCode" placeholder="Enter course code">
           <div class="form-group">
-            <label for="coursedescription">Course Description</label>
-            <input type="text" ngModel="{{editCourses?.coursedescription}}"ngModel name="coursedescription" class="form-control" id="coursedescription" placeholder="Enter course description" required>
+            <label for="courselevel">Course Level</label>
+            <input type="text" ngModel="{{editCourses?.courselevel}}" name="courselevel"class="form-control" id="courselevel" placeholder="Enter course level" required>
+          </div>
+          <div class="form-group">
+            <label for="courseduration">Course Duration</label>
+            <input type="text" ngModel="{{editCourses?.courseduration}}" name="courseduration"class="form-control" id="courseduration" placeholder="Enter course duration" required>
           </div>
           <div class="form-group">
             <label for="imageUrl">Image URL</label>
             <input type="text" ngModel="{{editCourses?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Enter image Url" required>
           </div>
-
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="closeEditModal()" data-dismiss="modal">Close</button>
             <button type="submit"(click)="onUpdateCourses(editForm.value)" class="btn btn-primary"(click)="closeEditModal()">Save changes</button>
@@ -107,3 +120,9 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="courses?.length == 0" class="alert alert-light" role="alert">
+  <h4 style="color: black;">NO COURSES!</h4>
+  <p>No Courses were found.</p>
+</div>
+

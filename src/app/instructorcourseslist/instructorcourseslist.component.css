@@ -13,10 +13,6 @@
   border-radius: 5px;
 }
 
-.col-6 h5 {
-  margin-top: 10px;
-  font-style: italic;
-}
 
 .col-6 p {
   margin-bottom: 5px;
@@ -55,4 +51,11 @@ img{
 
 .button:hover {
   background-color: #3071a9;
+}
+
+.lesson {
+  width: 200px;
+  height: 100px;
+  background-color: yellow;
+  margin-top: 20px;
 }
