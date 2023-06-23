@@ -8,6 +8,7 @@ import { Lessons } from './lessons';
 })
 export class LessonsService {
 
+  private lessons: Lessons[] = [];
   constructor(private http: HttpClient) { }
 
   public getLessons(): Observable<Lessons[]>{
@@ -27,4 +28,11 @@ export class LessonsService {
     return this.http.delete<any>(url);
   }
 
+  public getLessonsByCourseId(courseid?: number): Observable<Lessons[]> {
+    if (courseid === undefined) {
+      return this.http.get<Lessons[]>('http://localhost:8080/alllessons');
+    }
+    const url = `http://localhost:8080/lessons/course/${courseid}`;
+    return this.http.get<Lessons[]>(url);
+  }
 }

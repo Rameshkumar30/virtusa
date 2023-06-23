@@ -1,3 +1,15 @@
+
+<div>
+  <h2>Lessons</h2>
+  <ul>
+    <li *ngFor="let lesson of lessons">
+      {{ lesson.lessonname }}
+    </li>
+  </ul>
+</div>
+
+
+
 <h1>Welcome to the course </h1>
   <div class="row">
     <div class="col-4">
@@ -10,7 +22,7 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let course of courses" class="col-8">
+  <div *ngFor="let course of lessons" class="col-8">
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="lesson_1url"  aria-labelledby="lesson_1name">
         <div class="course-card">
@@ -40,7 +52,7 @@
 
       <br>
   </div>
-  <div *ngFor="let course of courses"|async class="col-8">
+  <div *ngFor="let course of lessons"|async class="col-8">
     <div class="tab-content" id="nav-tabContent">
       <div  class="tab-pane fade show active" id="lesson_1url"  aria-labelledby="lesson_1name">
 
@@ -68,9 +80,9 @@
 
 
 
-<div *ngFor="let course of courses">
-  <h2>{{ course.coursename }}</h2>
+<div *ngFor="let lesson of lessons">
+  <h2>{{ lesson.lessonname }}</h2>
   <ul>
-    <li *ngFor="let lesson of lessons">{{lesson.lessonid }}</li>
+   {{lesson.lessonid }}
   </ul>
 </div>
